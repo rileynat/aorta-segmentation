@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/autoDif
+END
+autoGrad.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/autoDif/autoGrad.m
+END
+autoHv.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/autoDif/autoHv.m
+END
+autoHess.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/autoDif/autoHess.m
+END
+fastDerivativeCheck.m
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/autoDif/fastDerivativeCheck.m
+END
+derivativeCheck.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/autoDif/derivativeCheck.m
+END
+autoTensor.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/autoDif/autoTensor.m
+END

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/mex
+END
+lbfgsC.c
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/mex/lbfgsC.c
+END
+lbfgsProdC.c
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/mex/lbfgsProdC.c
+END
+mcholC.c
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/mex/mcholC.c
+END
+lbfgsAddC.c
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/mex/lbfgsAddC.c
+END

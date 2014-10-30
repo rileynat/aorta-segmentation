@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils
+END
+fit_HUscale.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/fit_HUscale.m
+END
+cross_entropy.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/cross_entropy.m
+END
+display_network_nonsquare.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/display_network_nonsquare.m
+END
+fit_parameters_HUscale.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/fit_parameters_HUscale.m
+END
+laplacian_filter.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/laplacian_filter.m
+END
+sigmoid.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/sigmoid.m
+END
+compute_ap.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/compute_ap.m
+END
+replicate_struct.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/replicate_struct.m
+END
+gaussian_filter.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/gaussian_filter.m
+END

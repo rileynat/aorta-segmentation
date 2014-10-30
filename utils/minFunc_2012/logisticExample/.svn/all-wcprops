@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/logisticExample
+END
+example_minFunc_LR.m
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/logisticExample/example_minFunc_LR.m
+END
+mylogsumexp.m
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/logisticExample/mylogsumexp.m
+END
+LogisticHv.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/logisticExample/LogisticHv.m
+END
+LogisticDiagPrecond.m
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/logisticExample/LogisticDiagPrecond.m
+END
+LogisticLoss.m
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/logisticExample/LogisticLoss.m
+END

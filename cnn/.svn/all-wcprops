@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/sahm/!svn/ver/1960/matlab/sahm/aorta_seg_code/cnn
+END
+cnn_evaluate.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/cnn/cnn_evaluate.m
+END
+cnn_recon.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/cnn/cnn_recon.m
+END
+update_params.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/cnn/update_params.m
+END
+cnn_roll.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/cnn/cnn_roll.m
+END
+cnn_train_lbfgs.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/cnn/cnn_train_lbfgs.m
+END
+cnn_unroll.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/cnn/cnn_unroll.m
+END
+cnn_grad.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/cnn/cnn_grad.m
+END
+cnn_train.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/cnn/cnn_train.m
+END
+cnn_infer.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/cnn/cnn_infer.m
+END
+save_params.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/cnn/save_params.m
+END
+cnn_grad_roll.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/cnn/cnn_grad_roll.m
+END
