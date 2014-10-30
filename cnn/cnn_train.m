@@ -19,10 +19,10 @@ fname_mat = sprintf('models/%s.mat', params.fname);
 
 
 % -- monitoring variables, etc
+
 batchsize = params.batchsize;
 maxiter = params.maxiter;
 history.cost = zeros(maxiter, 1);
-
 
 % -- start training
 N = size(xtrain, 4);
@@ -49,6 +49,7 @@ for t = 1:maxiter,
         
         ts = tic;
         [cost, pos] = cnn_grad(xb, yb, weights, params);
+        
         cost_epoch(b) = cost/batchsize;
         te = toc(ts);
         

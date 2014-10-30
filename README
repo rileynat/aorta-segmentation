@@ -2,7 +2,7 @@ Author: Kihyuk Sohn and Xinchen Yan
 
 1) Copy data files 'vasc_GS_?.mat' and 'VLCrulers.mat' to the root directory
 2) Run 'startup.m'
-3) Run 'demo_single_model.m': it takes some time to preprocess the data
+3) Run 'demo_submodel_model.m': it takes some time to preprocess the data
 4) Run 'demo_joint_model.m': it takes some time to load learned submodels
 
 Please feel free to email me (skywalkeryxc@gmail.com) if you find some bugs in the code.
