@@ -3,6 +3,7 @@ function [ cost, theta ] = run_gradient_then_roll( theta, train_data, train_labe
 %   Detailed explanation goes here
     [cost, inToHidFilterGrad, inToHidBiasGrad, hidToOutFilterGrad, hidToOutBiasGrad] = gradient_cnn(theta, train_data, train_labels, filterSize, numFilters);
     [cost, theta] = roll_params(cost, inToHidFilterGrad, inToHidBiasGrad, hidToOutFilterGrad, hidToOutBiasGrad);
-
+    numGrad = gradientChecking( @(x) gradient_cnn(x, theta, train_data, train_labels, filterSize, numFilters), theta);
+    
 end
 
