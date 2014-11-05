@@ -1,5 +1,6 @@
 addpath cnn/;
 addpath utils/;
+%addpath filters/;
 if ~exist('results', 'dir'),
     mkdir('results');
 end
@@ -9,6 +10,7 @@ end
 if ~exist('vis', 'dir'),
     mkdir('vis');
 	mkdir('vis/cnn');
+    mkdir('vis/hidden_units');
 end
 
 if ~exist('original_data/','dir')
@@ -18,4 +20,3 @@ end
 if ~exist('normalized_data/','dir');
 	mkdir('normalized_data/','dir');
 end
-

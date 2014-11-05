@@ -14,5 +14,6 @@ for i = 1:16
 end
 
 %% Refine segmentation results with 16 learned models
-%% pls feel free to replace 'donothing.m' with your own code
-framework_train_test_joint(DEBUG, paramsname_list, @donothing, @fit_HUscale, 0, alpha);
+%% pls feel free to replace 'naive_smoothing.m' with your own code
+filterparams = struct('filtername', 'laplace', 'lambda', 0.1,'winsize',9);
+framework_train_test_joint(DEBUG, paramsname_list, @naive_smoothing, @fit_HUscale, 0, alpha, filterparams);

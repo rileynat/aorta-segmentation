@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc
+END
+conjGrad.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/conjGrad.m
+END
+ArmijoBacktrack.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/ArmijoBacktrack.m
+END
+minFunc_processInputOptions.m
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/minFunc_processInputOptions.m
+END
+taylorModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/taylorModel.m
+END
+mcholinc.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/mcholinc.m
+END
+lbfgs.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/lbfgs.m
+END
+dampedUpdate.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/dampedUpdate.m
+END
+precondTriu.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/precondTriu.m
+END
+minFunc.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/minFunc.m
+END
+lbfgsUpdate.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/lbfgsUpdate.m
+END
+mchol.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/mchol.m
+END
+polyinterp.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/polyinterp.m
+END
+lbfgsAdd.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/lbfgsAdd.m
+END
+WolfeLineSearch.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/WolfeLineSearch.m
+END
+precondDiag.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/precondDiag.m
+END
+isLegal.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/isLegal.m
+END
+lbfgsProd.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/lbfgsProd.m
+END
+precondTriuDiag.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/sahm/!svn/ver/1961/matlab/sahm/aorta_seg_code/utils/minFunc_2012/minFunc/precondTriuDiag.m
+END

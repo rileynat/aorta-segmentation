@@ -1,7 +1,7 @@
-function [ output_args ] = framework_train_test_joint( DEBUG, paramsname_list, fjoint_model, fnormalize, flag_save, alpha)
+function [ output_args ] = framework_train_test_joint( DEBUG, paramsname_list, fjoint_model, fnormalize, flag_save, alpha, filterparams)
 %FRAMEWORK_TRAIN_TEST_JOINT Summary of this function goes heres
 %   Detailed explanation goes here
-load('global_params.mat');
+
 if ~exist('DEBUG','var')
     DEBUG = 1;
 end
@@ -24,7 +24,7 @@ ORISRC_val = [ORISRC 'val/'];
 ORISRC_test = [ORISRC 'test/'];
 
 TRAINSET = transformOriData(ORISRC_train, DEBUG, 0);
-VALSET = transformOriData(ORISRC_val, DEBUG, 0);
+VALSET = transformOriData(ORISRC_val, DEBUG, 1);
 TESTSET = transformOriData(ORISRC_test, DEBUG, 1);
 
 %% Load Models trained separately
@@ -36,18 +36,43 @@ for group_idx = 1:16
     models{group_idx} = mid;
 end
 
-[TESTSET, fname] = fjoint_model(DEBUG, models, TRAINSET, VALSET, TESTSET, fnormalize, alpha);
+[VALSET, TESTSET, fname, filterspec] = fjoint_model(DEBUG, TRAINSET, VALSET, TESTSET, models, fnormalize, filterparams);
+
+overall_val_ap = evaluatePerformance(DEBUG, 'val', VALSET, ORISRC, fnormalize, fname, filterspec, flag_save);
+overall_test_ap = evaluatePerformance(DEBUG, 'test', TESTSET, ORISRC, fnormalize, fname, filterspec, flag_save);
+
+
+fprintf('AP: val = %g (std %g), test = %g (std %g)\n',  ...
+        mean(overall_val_ap), std(overall_val_ap), mean(overall_test_ap), std(overall_test_ap));
+    
+if (flag_save),
+    fid = fopen(sprintf('log/%s/all_subjects_meanAP.txt',fname), 'a+');
+    fprintf(fid, 'Fname: %s \t%s\n',fname, filterspec);
+    fprintf(fid, 'AP: val = %g (std %g), test = %g (std %g)\n',  ...
+        mean(overall_val_ap), std(overall_val_ap), mean(overall_test_ap), std(overall_test_ap));
+    fprintf(fid, '\n');
+    fclose(fid);
+end
+
+end
+
+%% function evaluatePerformance
+
+function overall_ap = evaluatePerformance(DEBUG, mode, dataset, ORISRC, fnormalize, fname, filterspec, flag_save)
+
+load('global_params.mat');
+ORISRC_part = [ORISRC mode '/'];
 
 overall_ap = [];
 
-for i=1:TESTSET.num,
-    xs = TESTSET.xlist{i};
-    ys_pred = TESTSET.ylist{i};
+for i=1:dataset.num,
+    xs = dataset.xlist{i};
+    ys_pred = dataset.ylist{i};
     seqL = size(xs, 3);
     
     %% Load Ground Truth
-    title = ['s' num2str(TESTSET.tlist(i)) '.mat'];
-    DATA = load([ORISRC_test, title]);
+    title = ['s' num2str(dataset.tlist(i)) '.mat'];
+    DATA = load([ORISRC_part, title]);
     
     ys = [];
     for j = 1:size(DATA.xmap3D, 3),
@@ -68,8 +93,8 @@ for i=1:TESTSET.num,
     end
     
     %% Evaluation
-    ap_test = [];
-    acc_test = [];
+    ap_part = [];
+    acc_part = [];
     for j = 1:seqL
         
         xc = xs(:,:,j);
@@ -79,10 +104,10 @@ for i=1:TESTSET.num,
         
         [~,~,ap] = compute_ap(yhat(:),yc(:));
         acc = 1-mean(yc(:) ~= (yhat(:)>0.5));
-        ap_test = cat(3, ap_test, ap);
-        acc_test = cat(3, acc_test, acc);
+        ap_part = cat(3, ap_part, ap);
+        acc_part = cat(3, acc_part, acc);
         
-        if 1, %% visualization
+        if 0, %% visualization
             fig = figure(1);
             set(fig, 'Position', [200, 200, 1200, 220]);
             subplot(1,3,1); imagesc(xc); colormap gray; axis off;
@@ -92,44 +117,33 @@ for i=1:TESTSET.num,
             %title('ground truth label');
             subplot(1,3,3); imagesc(yhat); colormap gray; axis off;
             %title(sprintf('predicted label, mean AP = %g, studyid = %d', ap, i));
-            pause;
+            pause(0.2);
         end
     end
     
-    fprintf('subject %d, AP: test = %g (std %g)\n', TESTSET.tlist(i), ...
-        mean(ap_test), std(ap_test));
-    fprintf('subject %d, ACC: test = %g (std %g)\n', TESTSET.tlist(i), ...
-        mean(acc_test), std(acc_test));
+    fprintf('subject %d, AP: %s = %g (std %g)\n', dataset.tlist(i), mode, ...
+        mean(ap_part), std(ap_part));
+    fprintf('subject %d, ACC: %s = %g (std %g)\n', dataset.tlist(i), mode, ...
+        mean(acc_part), std(acc_part));
     
     if (flag_save),
         mkdir(sprintf('log/%s',fname));
-        fid = fopen(sprintf('log/%s/all_subjects_list.txt',fname), 'a+');
+        fid = fopen(sprintf('log/%s/all_subjects_list_%s.txt',fname,filterspec), 'a+');
         fprintf(fid, '%s\n', title);
-        fprintf(fid, 'subject %d, AP: test = %g (std %g)\n', TESTSET.tlist(i), ...
-            mean(ap_test), std(ap_test));
-        fprintf(fid, 'subject %d, ACC: test = %g (std %g)\n', TESTSET.tlist(i), ...
-            mean(acc_test), std(acc_test));
+        fprintf(fid, 'subject %d, AP: %s = %g (std %g)\n', dataset.tlist(i), mode, ...
+            mean(ap_part), std(ap_part));
+        fprintf(fid, 'subject %d, ACC: %s = %g (std %g)\n', dataset.tlist(i), mode, ...
+            mean(acc_part), std(acc_part));
         fprintf(fid, '\n');
         fclose(fid);
     end
     
-    overall_ap = cat(3, overall_ap, ap_test);
+    overall_ap = cat(3, overall_ap, ap_part);
     
     if DEBUG,
         break;
     end
     
-end
-
-fprintf('AP: test = %g (std %g)\n',  ...
-        mean(overall_ap), std(overall_ap));
-    
-if (flag_save),
-    fid = fopen(sprintf('log/%s/all_subjects_meanAP.txt',fname), 'w');
-    fprintf(fid, 'AP: test = %g (std %g)\n',  ...
-        mean(overall_ap), std(overall_ap));
-    fprintf(fid, '\n');
-    fclose(fid);
 end
 
 end
