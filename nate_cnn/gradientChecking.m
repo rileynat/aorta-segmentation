@@ -1,4 +1,4 @@
-function [ numGrad ] = gradientChecking( costFunction, theta )
+function [ numGrad ] = gradientChecking( costFunction, theta, grad )
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
     epsilon = 10^-4;
@@ -14,10 +14,10 @@ function [ numGrad ] = gradientChecking( costFunction, theta )
         costPlus = costFunction(thetaPlus);
         costMinus = costFunction(thetaMinus);
         numGrad(i) = (costPlus - costMinus) ./ (2 * epsilon);
-    
+        fprintf(2, '%d\n', numGrad(i) - grad(i));
     end
     
-    diff = norm(numGrad-theta)/norm(numGrad+theta);
+    diff = norm(numGrad-grad)/norm(numGrad+grad);
     disp(diff);
 
 end

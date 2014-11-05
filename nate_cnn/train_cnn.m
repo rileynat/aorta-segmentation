@@ -17,7 +17,13 @@ function [ inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias ] = train_
     options.maxiter = numIterations;
     
     [optTheta ~] = minFunc(@(p) run_gradient_then_roll(p, train_data, train_labels, filterSize, numFilters), theta, options);
-    [inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias] = unroll_params(optTheta, numFilters, filterSize);
+    [inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias] = unroll_params(optTheta, filterSize, numFilters, size(train_data,1), size(train_data,2));
+    
+    inToHidFilters
+    inToHidBias
+    hidToOutFilters
+    hidToOutBias
+   
     
 end
 

@@ -1,6 +1,6 @@
-function [ conv_mat ] = convolveValid( input_data, filters, bias, filterSize, numFilters )
-%convolveValid Computest the convolution of the two matrices with type
-%valid
+function [ conv_mat ] = convFirstLayer( input_data, filters, bias, filterSize, numFilters )
+%convFirstLayer Computest the convolution of the two matrices with type
+%valid for the first layer
 %   Detailed explanation goes here
 
     batchSize = size(input_data, 3);
@@ -17,12 +17,14 @@ function [ conv_mat ] = convolveValid( input_data, filters, bias, filterSize, nu
     bias_mat = repmat(bias_reshape, [convSizeX convSizeY 1 batchSize]);
     
     conv_mat = bias_mat;
+
     
     for i = 1:numFilters
        
        conv = convn(input_data(:,:,:), filters_mat(:,:,i), 'valid');
-       conv_mat(:,:,i,:) = conv_mat(:,:,i,:) + reshape(conv, [size(conv,1) size(conv,2) 1 size(conv,3)]);
+       conv_mat(:,:,i,:) = conv_mat(:,:,i,:) + permute(conv, [1 2 4 3]);
     end
+    
 
 end
 

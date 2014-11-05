@@ -8,7 +8,6 @@ weights = cnn_unroll(theta, params);
 h = cnn_infer(xtrain, weights, params);
 yhat = cnn_recon(h, weights, params);
 
-
 % -- compute cost
 cost = cross_entropy(ytrain, yhat)/batchsize;
 

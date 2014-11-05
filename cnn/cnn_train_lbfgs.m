@@ -3,6 +3,7 @@ function weights = cnn_train_lbfgs(xtrain, ytrain, params, xval, yval)
 
 % -- initialization
 weights = struct;
+rng(1,'twister');
 weights.vishid = 0.01*randn(params.ws, params.ws, params.numch, params.numhid);
 weights.hidvis = 0.01*randn(params.ws, params.ws, params.numhid, params.numout);
 weights.hidbias = zeros(params.numhid, 1);
