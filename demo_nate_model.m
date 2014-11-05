@@ -11,7 +11,7 @@ train_data_x = [];
 train_data_y = [];
 
 
-for i=1:18
+for i=8
     filename = sprintf('normalized_data/train/%02d.mat', i);
     cModel = load(filename);
     x_input = double(cModel.cModel.x);
@@ -23,7 +23,7 @@ end
 val_data_x = [];
 val_data_y = [];
 
-for i=1:18
+for i=8
     filename = sprintf('normalized_data/val/%02d.mat', i);
     cModel = load(filename);
     x_input = double(cModel.cModel.x);
@@ -35,7 +35,7 @@ end
 test_data_x = [];
 test_data_y = [];
 
-for i=1:18
+for i=8
     filename = sprintf('normalized_data/test/%02d.mat', i);
     cModel = load(filename);
     x_input = double(cModel.cModel.x);
@@ -52,8 +52,8 @@ train_data_x = fit_HUscale(train_data_x);
 
 addpath('nate_cnn/');
 
-[inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias] = train_cnn(train_data_x(:,:,1:30), train_data_y(:,:,1:30), numFilters, filterSize); 
+[inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias] = train_cnn(train_data_x(:,:,1:3), train_data_y(:,:,1:3), numFilters, filterSize); 
 
-[validAcc] = validate_cnn(inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias, filterSize, numFilters);
+[validAcc] = validate_cnn(val_data_x(:,:,1:3), val_data_y(:,:,1:3), inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias, filterSize, numFilters);
 
-[testAcc] = test_cnn(inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias, filterSize, numFilters);
+[testAcc] = test_cnn(test_data_x(:,:,1:3), test_data_y(:,:,1:3), inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias, filterSize, numFilters);
