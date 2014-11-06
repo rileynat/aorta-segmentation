@@ -6,7 +6,7 @@ load('global_params.mat');
 
 if ~exist('opt', 'var'),
     % optimization method, 'sgd' or 'lbfgs'
-    opt = 'sgd';
+    opt = 'lbfgs';
 end
 if ~exist('numhid', 'var'),
     % number of convolutional filters

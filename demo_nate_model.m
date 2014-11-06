@@ -52,8 +52,12 @@ train_data_x = fit_HUscale(train_data_x);
 
 addpath('nate_cnn/');
 
-[inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias] = train_cnn(train_data_x(:,:,1:3), train_data_y(:,:,1:3), numFilters, filterSize); 
+[inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias] = train_cnn(train_data_x(:,:,:), train_data_y(:,:,:), numFilters, filterSize); 
 
-[validAcc] = validate_cnn(val_data_x(:,:,1:3), val_data_y(:,:,1:3), inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias, filterSize, numFilters);
+[validAcc] = validate_cnn(val_data_x(:,:,1:3), val_data_y(:,:,:), inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias, filterSize, numFilters);
 
-[testAcc] = test_cnn(test_data_x(:,:,1:3), test_data_y(:,:,1:3), inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias, filterSize, numFilters);
+disp(validAcc);
+
+[testAcc] = test_cnn(test_data_x(:,:,1:3), test_data_y(:,:,:), inToHidFilters, inToHidBias, hidToOutFilters, hidToOutBias, filterSize, numFilters);
+
+disp(testAcc);
