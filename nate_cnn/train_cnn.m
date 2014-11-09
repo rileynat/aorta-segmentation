@@ -2,6 +2,7 @@ function [ weights ] = train_cnn(train_data, train_labels, numFilters, filterSiz
 %train_cnn Takes the normalized input images and outputs the correct
 %parameters for training
 %   TODO when finished
+    rng(1);
     weights = struct;
     weights.inToHidFilters = 0.01 .* randn(filterSize, filterSize, numFilters);
     weights.inToHidBias = zeros(numFilters, 1);
