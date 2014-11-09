@@ -54,7 +54,7 @@ addpath('nate_cnn/');
 
 
 
-[weights] = train_cnn(train_data_x(:,:,1:7), train_data_y(:,:,1:7), numFilters, filterSize); 
+[weights] = train_cnn(train_data_x(:,:,1:10), train_data_y(:,:,1:10), numFilters, filterSize); 
 
 [validAcc] = validate_cnn(val_data_x(:,:,:), val_data_y(:,:,:), weights, filterSize, numFilters);
 
