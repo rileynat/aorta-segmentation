@@ -41,7 +41,7 @@ function [ cost, grad ] = gradient_cnn ( theta, train_data, train_labels, filter
 
         for i = 1:numFilters 
             %why reverse the filters
-            grad.inToHidFilter(:,:,i) = convn(train_data, permute(deltaHid(end:-1:1, end:-1:1, i, end:-1:1), [1 2 4 3]), 'valid');
+            grad.inToHidFilters(:,:,i) = convn(train_data, permute(deltaHid(end:-1:1, end:-1:1, i, end:-1:1), [1 2 4 3]), 'valid');
         end
     end
     
