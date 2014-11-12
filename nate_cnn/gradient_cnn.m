@@ -53,7 +53,7 @@ function [ cost, grad ] = gradient_cnn ( theta, train_data, train_labels, filter
         deltaHid1 = zeros(size(hiddenLayer1));
         for i = 1:filterInfo.numFilters1
             for j = 1:filterInfo.numFilters2
-                deltaHid1(:,:,i,:) = deltaHid1(:,:,i,:) + convn(weights.hidToHidFilters(end:-1:1,end:-1:1,i,j), deltaHid2(:,:,j,:), 'full');
+                deltaHid1(:,:,i,:) = deltaHid1(:,:,i,:) + convn(weights.hidToHidFilters(:,:,i,j), deltaHid2(:,:,j,:), 'full');
                 %deltaHid1(:,:,i,:) = deltaHid1(:,:,i,:) + convn(deltaHid2(:,:,j,:), weights.hidToHidFilters(:,:,i,j), 'full');
             end
         end
@@ -62,7 +62,7 @@ function [ cost, grad ] = gradient_cnn ( theta, train_data, train_labels, filter
         deltaSum = sum(sum(sum(deltaHid1,1), 2), 4);
         grad.inToHidBias = deltaSum(:);
         for i = 1:filterInfo.numFilters1
-            grad.inToHidFilter(:,:,i) = convn(train_data, permute(deltaHid1(end:-1:1, end:-1:1, i, end:-1:1), [1 2 4 3]), 'valid');
+            grad.inToHidFilters(:,:,i) = convn(train_data, permute(deltaHid1(end:-1:1, end:-1:1, i, end:-1:1), [1 2 4 3]), 'valid');
         end
     end
     

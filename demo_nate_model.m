@@ -1,3 +1,4 @@
+
 close all;
 clc;
 startup;
@@ -11,7 +12,7 @@ train_data_x = [];
 train_data_y = [];
 
 
-for i=8
+for i=4
     filename = sprintf('normalized_data/train/%02d.mat', i);
     cModel = load(filename);
     x_input = double(cModel.cModel.x);
@@ -23,7 +24,7 @@ end
 val_data_x = [];
 val_data_y = [];
 
-for i=8
+for i=4
     filename = sprintf('normalized_data/val/%02d.mat', i);
     cModel = load(filename);
     x_input = double(cModel.cModel.x);
@@ -35,7 +36,7 @@ end
 test_data_x = [];
 test_data_y = [];
 
-for i=8
+for i=4
     filename = sprintf('normalized_data/test/%02d.mat', i);
     cModel = load(filename);
     x_input = double(cModel.cModel.x);
@@ -57,9 +58,9 @@ train_data_x = fit_HUscale(train_data_x);
 
 addpath('nate_cnn/');
 
+[weights] = train_cnn(train_data_x(:,:,:), train_data_y(:,:,:), filterInfo); 
 
-
-[weights] = train_cnn(train_data_x(:,:,1:3), train_data_y(:,:,1:3), filterInfo); 
+save(strcat('nate_cnn/weights/weights_', date, '.mat'), 'weights');
 
 [validAcc] = validate_cnn(val_data_x(:,:,:), val_data_y(:,:,:), weights, filterInfo);
 
