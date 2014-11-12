@@ -1,3 +1,4 @@
+
 close all;
 clc;
 startup;
@@ -11,7 +12,7 @@ train_data_x = [];
 train_data_y = [];
 
 
-for i=8
+for i=4
     filename = sprintf('normalized_data/train/%02d.mat', i);
     cModel = load(filename);
     x_input = double(cModel.cModel.x);
@@ -23,7 +24,7 @@ end
 val_data_x = [];
 val_data_y = [];
 
-for i=8
+for i=4
     filename = sprintf('normalized_data/val/%02d.mat', i);
     cModel = load(filename);
     x_input = double(cModel.cModel.x);
@@ -35,7 +36,7 @@ end
 test_data_x = [];
 test_data_y = [];
 
-for i=8
+for i=4
     filename = sprintf('normalized_data/test/%02d.mat', i);
     cModel = load(filename);
     x_input = double(cModel.cModel.x);
@@ -44,22 +45,27 @@ for i=8
     test_data_y = cat(3, test_data_y, y_input);
 end
 
-numFilters = 50;
-filterSize = 16;
+filterInfo = struct;
+filterInfo.numFilters1 = 30;
+filterInfo.filterSize1 = 5;
+filterInfo.numFilters2 = 30;
+filterInfo.filterSize2 = 16;
+filterInfo.numFilters3 = filterInfo.numFilters2;
+filterInfo.filterSize3 = filterInfo.filterSize1 + filterInfo.filterSize2 - 1;
 
 addpath('utils/');
 train_data_x = fit_HUscale(train_data_x);
 
 addpath('nate_cnn/');
 
+[weights] = train_cnn(train_data_x(:,:,:), train_data_y(:,:,:), filterInfo); 
 
+save(strcat('nate_cnn/weights/weights_', date, '.mat'), 'weights');
 
-[weights] = train_cnn(train_data_x(:,:,1:10), train_data_y(:,:,1:10), numFilters, filterSize); 
-
-[validAcc] = validate_cnn(val_data_x(:,:,:), val_data_y(:,:,:), weights, filterSize, numFilters);
+[validAcc] = validate_cnn(val_data_x(:,:,:), val_data_y(:,:,:), weights, filterInfo);
 
 disp(validAcc);
 
-[testAcc] = test_cnn(test_data_x(:,:,:), test_data_y(:,:,:), weights, filterSize, numFilters);
+[testAcc] = test_cnn(test_data_x(:,:,:), test_data_y(:,:,:), weights, filterInfo);
 
 disp(testAcc);

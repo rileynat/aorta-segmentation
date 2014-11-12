@@ -7,6 +7,8 @@ function [ cost, theta ] = roll_params( cost, weights )
     theta = [];
     theta = [theta ; weights.inToHidFilters(:)];
     theta = [theta ; weights.inToHidBias(:)];
+    theta = [theta ; weights.hidToHidFilters(:)];
+    theta = [theta ; weights.hidToHidBias(:)];
     theta = [theta ; weights.hidToOutFilters(:)];
     theta = [theta ; weights.hidToOutBias(:)];
 
