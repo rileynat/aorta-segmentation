@@ -1,4 +1,0 @@
-Bias for both hidden and output layers
-     do we compute bias for each pixel for each unit
-
-initializing randomly
