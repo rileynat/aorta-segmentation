@@ -7,14 +7,17 @@ function [features] = RunSparseAE(data,  saeInfo)
     %  The activation of the hidden units will be returned so that 
     %  it can be used as input to a CNN or other classification network.
     
-    addpath('../common')
-    addpath(genpath('utils/minFunc_2012'))
+    addpath('common')
+    addpath('utils/minFunc_2012');
+    addpath(genpath('utils/minFunc_2012/'));
+    disp('hello');
+    pwd
     
     theta = InitializeParameters(saeInfo.hiddenSize, saeInfo.inputSize);
     
     % Train the sparseae
     options.Method = 'lbfgs';
-    options.maxIter = 20;
+    options.maxIter = 200;
     options.display = 'on';
     
     [opttheta, cost] = minFunc( @(p) sparseAutoencoderCost(p, ...
@@ -27,7 +30,7 @@ function [features] = RunSparseAE(data,  saeInfo)
     %W1 = reshape(opttheta(1:saeInfo.hiddenSize * saeInfo.inputSize), saeInfo.hiddenSize, saeInfo.inputSize);
     %display_network(W1');
     
-    features = feedForwardAutoencoder(opttheta, saeInfo, data);
+    features = FeedForwardAutoencoder(opttheta, saeInfo, data);
         
     save('features');    
 

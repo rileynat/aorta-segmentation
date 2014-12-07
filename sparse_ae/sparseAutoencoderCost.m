@@ -18,6 +18,14 @@ W2 = reshape(theta(hiddenSize*visibleSize+1:2*hiddenSize*visibleSize), visibleSi
 b1 = theta(2*hiddenSize*visibleSize+1:2*hiddenSize*visibleSize+hiddenSize);
 b2 = theta(2*hiddenSize*visibleSize+hiddenSize+1:end);
 
+if size(W1, 1) ~= size(b1, 1)
+    b1 = b1(2:end);
+end
+
+if size(W2, 1) ~= size(b2, 1)
+    b2 = b2(2:end);
+end
+
 % Cost and gradient variables (your code needs to compute these values). 
 % Here, we initialize them to zeros. 
 cost = 0;
@@ -70,9 +78,9 @@ d2_penalty = -(rho./rho_hat) + (1-rho) ./ (1-rho_hat);
 d2 = bsxfun(@plus, W2' * d3,  beta * d2_penalty) .* sigmoid_deriv(z2);  %%switch this with d2 once it works
 %d2 = (W2' * d3) .* sigmoid_deriv(z2);
 
-W2grad = (d3 * a2') / m + lambda * W2;
+W2grad = (gpuArray(d3) * gpuArray(a2')) / gpuArray(m) + gpuArray(lambda) * gpuArray(W2);
 
-W1grad = (d2 * data') / m + lambda * W1;
+W1grad = (gpuArray(d2) * gpuArray(data')) /gpuArray(m) + gpuArray(lambda) * gpuArray(W1);
 
 b1grad = (1 / m) .* sum(d2, 2);
 
@@ -85,7 +93,7 @@ b2grad = (1 / m) .* sum(d3, 2);
 % to a vector format (suitable for minFunc).  Specifically, we will unroll
 % your gradient matrices into a vector.
 
-grad = [W1grad(:) ; W2grad(:) ; b1grad(:) ; b2grad(:)];
+grad = [gather(W1grad(:)) ; gather(W2grad(:)) ; b1grad(:) ; b2grad(:)];
 
 end
 
