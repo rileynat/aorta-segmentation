@@ -3,9 +3,9 @@ close all;
 clc;
 startup;
 
-for i=1:3
-     data_preprocess( i, 0 ); %% (x,y): y=1 for DEBUG MODE
-end
+%for i=1:3
+%     data_preprocess( i, 0 ); %% (x,y): y=1 for DEBUG MODE
+%end
 
 
 train_data_x = [];
@@ -55,6 +55,8 @@ filterInfo.filterSize3 = filterInfo.filterSize1 + filterInfo.filterSize2 - 1;
 
 addpath('utils/');
 train_data_x = fit_HUscale(train_data_x);
+val_data_x = fit_HUscale(val_data_x);
+test_data_x = fit_HUscale(test_data_x);
 
 addpath('nate_cnn/');
 
