@@ -1,18 +1,22 @@
+function [] = demo_nate_model(weights)
 
 close all;
 clc;
 startup;
 
-%for i=1:3
-%     data_preprocess( i, 0 ); %% (x,y): y=1 for DEBUG MODE
-%end
+addpath('data');
+
+for i=1:3
+     data_preprocess( i, 0 ); %% (x,y): y=1 for DEBUG MODE
+end
 
 
 train_data_x = [];
 train_data_y = [];
 
+data_set = 4;
 
-for i=4
+for i=data_set
     filename = sprintf('normalized_data/train/%02d.mat', i);
     cModel = load(filename);
     x_input = double(cModel.cModel.x);
@@ -24,7 +28,7 @@ end
 val_data_x = [];
 val_data_y = [];
 
-for i=4
+for i=data_set
     filename = sprintf('normalized_data/val/%02d.mat', i);
     cModel = load(filename);
     x_input = double(cModel.cModel.x);
@@ -36,7 +40,7 @@ end
 test_data_x = [];
 test_data_y = [];
 
-for i=4
+for i=data_set
     filename = sprintf('normalized_data/test/%02d.mat', i);
     cModel = load(filename);
     x_input = double(cModel.cModel.x);
@@ -58,16 +62,26 @@ train_data_x = fit_HUscale(train_data_x);
 val_data_x = fit_HUscale(val_data_x);
 test_data_x = fit_HUscale(test_data_x);
 
-addpath('nate_cnn/');
+addpath('cnn/');
 
-[weights] = train_cnn(train_data_x(:,:,1:3), train_data_y(:,:,1:3), filterInfo); 
+if ~exist('weights', 'var')
+    disp('Training...');
+    [weights] = train_cnn(train_data_x(:,:,1:1), train_data_y(:,:,1:1), filterInfo); 
+end
 
-save(strcat('nate_cnn/weights/weights_', date, '.mat'), 'weights');
+[valAP, valAcc, val_pred] = validate_cnn(val_data_x(:,:,:), val_data_y(:,:,:), weights, filterInfo);
 
-[validAcc] = validate_cnn(val_data_x(:,:,:), val_data_y(:,:,:), weights, filterInfo);
+[testAP, testAcc, test_pred] = test_cnn(test_data_x(:,:,:), test_data_y(:,:,:), weights, filterInfo);
 
-disp(validAcc);
+fprintf('AP: val = %g (std %g), test = %g (std %g))\n', ...
+        mean(valAP), std(valAP), mean(testAP), std(testAP));
+fprintf('ACC: val = %g (std %g), test = %g (std %g))\n', ...
+        mean(valAcc), std(valAcc), mean(testAcc), std(testAcc));
+  
+% Save all useful info in a directory named by date/time
+info = clock;
+mat_name = sprintf('results/%d-%d-%d-%d:%d-set-%d', info(1), info(2), info(3), info(4), info(5), data_set);
+save(mat_name, 'weights', 'valAP', 'valAcc', 'testAP', 'testAcc');
 
-[testAcc] = test_cnn(test_data_x(:,:,:), test_data_y(:,:,:), weights, filterInfo);
+end
 
-disp(testAcc);
