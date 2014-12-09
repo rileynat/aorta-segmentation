@@ -11,8 +11,6 @@ function [ weights ] = train_cnn(train_data, train_labels, filterInfo )
     weights.hidToOutFilters = 0.01 .* randn(filterInfo.filterSize3, filterInfo.filterSize3, filterInfo.numFilters3);
     weights.hidToOutBias = zeros(size(train_data,1), size(train_data,2));
     
-    weights.inToHidFilters
-
     numIterations = 5000;
     
     addpath(genpath('utils/minFunc_2012/'));

@@ -1,4 +1,4 @@
-function [ ap_val, acc_val ] = validate_cnn( val_data, val_labels, weights, filterInfo )
+function [ ap_val, acc_val, val_pred ] = validate_cnn( val_data, val_labels, weights, filterInfo )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
     %[~, theta] = roll_params(0, weights);
@@ -7,7 +7,9 @@ function [ ap_val, acc_val ] = validate_cnn( val_data, val_labels, weights, filt
     disp('Validating...');
     
     % FeedForward
+    val_data = fit_HUscale(val_data);
     yhat_pred = FeedForwardCNN(val_data, weights, filterInfo);
+    val_pred = yhat_pred;
     
     ap_val = zeros(size(val_data, 3), 1);
     acc_val = zeros(size(val_data,3), 1);

@@ -67,18 +67,18 @@ if ~exist('weights', 'var')
     [weights] = train_cnn(train_data_x(:,:,1:1), train_data_y(:,:,1:1), filterInfo); 
 end
 
-[valAP, valAcc] = validate_cnn(val_data_x(:,:,:), val_data_y(:,:,:), weights, filterInfo);
+[valAP, valAcc, val_pred] = validate_cnn(val_data_x(:,:,:), val_data_y(:,:,:), weights, filterInfo);
 
-[testAP, testAcc] = test_cnn(test_data_x(:,:,:), test_data_y(:,:,:), weights, filterInfo);
+[testAP, testAcc, test_pred] = test_cnn(test_data_x(:,:,:), test_data_y(:,:,:), weights, filterInfo);
 
 fprintf('AP: val = %g (std %g), test = %g (std %g))\n', ...
         mean(valAP), std(valAP), mean(testAP), std(testAP));
 fprintf('ACC: val = %g (std %g), test = %g (std %g))\n', ...
-        mean(acc_val), std(acc_val), mean(acc_test), std(acc_test));
+        mean(valAcc), std(valAcc), mean(testAcc), std(testAcc));
   
 % Save all useful info in a directory named by date/time
 info = clock;
-mat_name = sprintf('results/%d-%d-%d-%d:%d-set-%d', clock(1), clock(2), clock(3), clock(4), clock(5), data_set);
+mat_name = sprintf('results/%d-%d-%d-%d:%d-set-%d', info(1), info(2), info(3), info(4), info(5), data_set);
 save(mat_name, 'weights', 'valAP', 'valAcc', 'testAP', 'testAcc');
 
 end
