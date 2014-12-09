@@ -61,25 +61,27 @@ addpath('utils/');
 train_data_x = fit_HUscale(train_data_x);
 
 % Train Autoencoder
-subset_size = 3;
+subset_size = 50;
 size(train_data_x)
  
-
+gpuDevice(1);
 
 train_x_roll_subset = reshape(train_data_x(:,:,1:subset_size), size(train_data_x, 1) * ...
-    size(square_train_data_x, 2), subset_size);
+    size(train_data_x, 2), subset_size);
 
 reduction_factor = 4/5;
 reduction = size(train_data_x, 1) - size(train_data_x, 1)*reduction_factor;
 saeInfo = struct;
 saeInfo.inputSize = size(train_x_roll_subset, 1);
-saeInfo.hiddenSize = saeInfo.inputSize * reduction_factor; %CHANGE THIS
+saeInfo.hiddenSize = single(saeInfo.inputSize * reduction_factor.^2); %CHANGE THIS
 saeInfo.sparsity = .1;
 saeInfo.lambda = 3e-3;
 saeInfo.beta = 3;
 
 input_features = RunSparseAE(train_x_roll_subset, saeInfo);
-save('input_features');
+clear feature_file;
+feature_file = sprintf('features/input_features_%s', date);
+save(feature_file, 'input_features');
 
 
 % Reshape Features

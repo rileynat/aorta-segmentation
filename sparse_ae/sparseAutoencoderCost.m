@@ -18,6 +18,14 @@ W2 = reshape(theta(hiddenSize*visibleSize+1:2*hiddenSize*visibleSize), visibleSi
 b1 = theta(2*hiddenSize*visibleSize+1:2*hiddenSize*visibleSize+hiddenSize);
 b2 = theta(2*hiddenSize*visibleSize+hiddenSize+1:end);
 
+if size(W1, 1) ~= size(b1, 1)
+    b1 = b1(2:end);
+end
+
+if size(W2, 1) ~= size(b2, 1)
+    b2 = b2(2:end);
+end
+
 % Cost and gradient variables (your code needs to compute these values). 
 % Here, we initialize them to zeros. 
 cost = 0;
@@ -72,7 +80,7 @@ d2 = bsxfun(@plus, W2' * d3,  beta * d2_penalty) .* sigmoid_deriv(z2);  %%switch
 
 W2grad = (d3 * a2') / m + lambda * W2;
 
-W1grad = (d2 * data') / m + lambda * W1;
+W1grad = (d2 * data') /m + lambda * W1;
 
 b1grad = (1 / m) .* sum(d2, 2);
 
