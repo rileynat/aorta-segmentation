@@ -14,7 +14,7 @@ function [ conv_mat ] = convMiddleLayer( input, filters, bias, numOutUnits, filt
     convSizeX = size(input, 1) - filterSize + 1;
     convSizeY = size(input, 2) - filterSize + 1;
     
-    bias_reshape = reshape(bias, [1 1 numFilters]);
+    bias_reshape = reshape(bias, [1 1 numOutUnits]);
     bias_mat = repmat(bias_reshape, [convSizeX convSizeY 1 batchSize]);
     
     conv_mat = bias_mat;

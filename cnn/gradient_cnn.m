@@ -30,7 +30,7 @@ function [ cost, grad ] = gradient_cnn ( theta, train_data, train_labels, filter
     
     if gradFlag == 1
 
-        for i = 1:filterInfo.numFilters1
+        for i = 1:filterInfo.numFilters2
             %why reverse the filters
             grad.hidToOutFilters(:,:,i) = convn(deltaObj, permute(hiddenLayer2(end:-1:1, end:-1:1, i, end:-1:1), [1 2 4 3]), 'valid'); 
         end

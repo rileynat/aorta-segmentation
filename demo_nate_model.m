@@ -52,7 +52,7 @@ end
 filterInfo = struct;
 filterInfo.numFilters1 = 30;
 filterInfo.filterSize1 = 5;
-filterInfo.numFilters2 = 30;
+filterInfo.numFilters2 = 20;
 filterInfo.filterSize2 = 16;
 filterInfo.numFilters3 = filterInfo.numFilters2;
 filterInfo.filterSize3 = filterInfo.filterSize1 + filterInfo.filterSize2 - 1;
@@ -66,7 +66,7 @@ addpath('cnn/');
 
 if ~exist('weights', 'var')
     disp('Training...');
-    [weights] = train_cnn(train_data_x(:,:,1:1), train_data_y(:,:,1:1), filterInfo); 
+    [weights] = train_cnn(train_data_x(:,:,1:2), train_data_y(:,:,1:2), filterInfo); 
 end
 
 [valAP, valAcc, val_pred] = validate_cnn(val_data_x(:,:,:), val_data_y(:,:,:), weights, filterInfo);
