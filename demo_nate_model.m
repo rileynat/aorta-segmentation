@@ -56,6 +56,7 @@ filterInfo.numFilters2 = 20;
 filterInfo.filterSize2 = 16;
 filterInfo.numFilters3 = filterInfo.numFilters2;
 filterInfo.filterSize3 = filterInfo.filterSize1 + filterInfo.filterSize2 - 1;
+batchsize = size(train_data_x, 3);
 
 addpath('utils/');
 train_data_x = fit_HUscale(train_data_x);
@@ -66,7 +67,7 @@ addpath('cnn/');
 
 if ~exist('weights', 'var')
     disp('Training...');
-    [weights] = train_cnn(train_data_x(:,:,1:2), train_data_y(:,:,1:2), filterInfo); 
+    [weights] = train_cnn(train_data_x(:,:,:), train_data_y(:,:,:), filterInfo, batchsize); 
 end
 
 [valAP, valAcc, val_pred] = validate_cnn(val_data_x(:,:,:), val_data_y(:,:,:), weights, filterInfo);

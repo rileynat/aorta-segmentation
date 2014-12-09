@@ -13,6 +13,17 @@ function [ cost, grad ] = gradient_cnn ( theta, train_data, train_labels, filter
     hiddenLayer2 = sigmoid(hiddenLayer2Raw);
     outputLayerRaw = convFinalLayer(hiddenLayer2, weights.hidToOutFilters, weights.hidToOutBias, filterInfo.filterSize3, filterInfo.numFilters3);
     outputLayer = sigmoid(outputLayerRaw);
+
+    ap_cur = zeros(size(train_data, 3), 1);
+    % Display current AP
+    for i = 1:size(train_data, 3)
+       yhat = outputLayer(:,:,i);
+       yc = train_labels(:,:,i);
+       [~, ~, ap] = compute_ap(yhat(:), yc(:));
+       ap_cur(i) =  ap;
+    end
+
+    disp(sprintf('AP: %g', mean(ap_cur)));
     
     cost = cost_cnn(outputLayer, train_labels) ./ m;
     
