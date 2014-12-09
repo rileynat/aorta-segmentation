@@ -3,9 +3,9 @@ close all;
 clc;
 startup;
 
-%for i=1:3
-%     data_preprocess( i, 0 ); %% (x,y): y=1 for DEBUG MODE
-%end
+for i=1:3
+     data_preprocess( i, 0 ); %% (x,y): y=1 for DEBUG MODE
+end
 
 
 train_data_x = [];
@@ -60,7 +60,8 @@ test_data_x = fit_HUscale(test_data_x);
 
 addpath('nate_cnn/');
 
-[weights] = train_cnn(train_data_x(:,:,1:3), train_data_y(:,:,1:3), filterInfo); 
+[weights] = train_cnn(train_data_x(:,:,:), train_data_y(:,:,:), filterInfo); 
+save('nate_cnn/weights.mat', 'weights');
 
 save(strcat('nate_cnn/weights/weights_', date, '.mat'), 'weights');
 
