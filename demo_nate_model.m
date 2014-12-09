@@ -48,7 +48,7 @@ end
 filterInfo = struct;
 filterInfo.numFilters1 = 30;
 filterInfo.filterSize1 = 5;
-filterInfo.numFilters2 = 30;
+filterInfo.numFilters2 = 20;
 filterInfo.filterSize2 = 16;
 filterInfo.numFilters3 = filterInfo.numFilters2;
 filterInfo.filterSize3 = filterInfo.filterSize1 + filterInfo.filterSize2 - 1;
