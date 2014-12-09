@@ -60,7 +60,7 @@ test_data_x = fit_HUscale(test_data_x);
 
 addpath('nate_cnn/');
 
-[weights] = train_cnn(train_data_x(:,:,:), train_data_y(:,:,:), filterInfo); 
+[weights] = train_cnn(train_data_x(:,:,1:3), train_data_y(:,:,1:3), filterInfo); 
 
 save(strcat('nate_cnn/weights/weights_', date, '.mat'), 'weights');
 
