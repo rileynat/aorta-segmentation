@@ -14,7 +14,7 @@ end
 train_data_x = [];
 train_data_y = [];
 
-data_set = 4;
+data_set = 12;
 
 for i=data_set
     filename = sprintf('normalized_data/train/%02d.mat', i);
@@ -56,7 +56,9 @@ filterInfo.numFilters2 = 20;
 filterInfo.filterSize2 = 16;
 filterInfo.numFilters3 = filterInfo.numFilters2;
 filterInfo.filterSize3 = filterInfo.filterSize1 + filterInfo.filterSize2 - 1;
-batchsize = size(train_data_x, 3);
+filterInfo.data_set = data_set;
+%batchsize = size(train_data_x, 3);
+batchsize = 100;
 
 addpath('utils/');
 train_data_x = fit_HUscale(train_data_x);
@@ -67,7 +69,7 @@ addpath('cnn/');
 
 if ~exist('weights', 'var')
     disp('Training...');
-    [weights] = train_cnn(train_data_x(:,:,:), train_data_y(:,:,:), filterInfo, batchsize); 
+    [weights] = train_cnn(train_data_x(:,:,:), train_data_y(:,:,:), filterInfo); 
 end
 
 [valAP, valAcc, val_pred] = validate_cnn(val_data_x(:,:,:), val_data_y(:,:,:), weights, filterInfo);

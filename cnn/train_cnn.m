@@ -1,4 +1,4 @@
-function [ weights ] = train_cnn(train_data, train_labels, filterInfo, batchsize )
+function [ weights ] = train_cnn(train_data, train_labels, filterInfo)
 %train_cnn Takes the normalized input images and outputs the correct
 %parameters for training
 %   TODO when finished
@@ -19,24 +19,25 @@ function [ weights ] = train_cnn(train_data, train_labels, filterInfo, batchsize
     
     % lbfgs
     options.method = 'lbfgs';
-    options.maxiter = numIterations;
+    options.maxiter = 500;
     
-    num_batches = ceil(size(train_data(3))/batchsize);
+    batchsize = floor(size(train_data, 3)/4);
+%    train_x_1 = train_data(:, :, 1:batchsize);
+%    train_y_1 = train_labels(:, :, 1:batchsize);
+%    train_x_2 = train_data(:, :, batchsize+1:2*batchsize);
+%    train_y_2 = train_labels(:, :, batchsize+1:2*batchsize);
+%    train_x_3 = train_data(:, :, 2*batchsize+1:3*batchsize);
+%    train_y_3 = train_labels(:, :, 2*batchsize+1:3*batchsize);
+%    train_x_4 = train_data(:, :, 3*batchsize+1:end); 
+%    train_y_4 = train_labels(:, :, 3*batchsize+1:end); 
     
-    start = 0;
-    end_ind = 0;
-    for batch = 1:num_batches
-        start = end_ind + 1;
-        end_ind = start + batchsize - 1;
-        if end_ind > size(train_data, 3)
-            end_ind = size(train_data, 3);
-        end
-
-        train_data_batch = train_data(:,:,start:end_ind);
-        train_labels_batch = train_labels(:,:,start:end_ind);
-        [optTheta, ~] = minFunc(@(p) run_gradient_then_roll(p, train_data_batch, train_labels_batch, filterInfo), theta, options);
+    
+%    for iter= 1:1000
+        [optTheta, ~] = minFunc(@(p) run_gradient_then_roll(p, train_data, train_labels, filterInfo), theta, options);
         theta = optTheta;
-    end
+
+
+%    end
 
     weights = unroll_params(optTheta, filterInfo, size(train_data,1), size(train_data,2));
 

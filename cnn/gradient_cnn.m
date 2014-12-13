@@ -77,7 +77,18 @@ function [ cost, grad ] = gradient_cnn ( theta, train_data, train_labels, filter
             grad.inToHidFilters(:,:,i) = convn(train_data, permute(deltaHid1(end:-1:1, end:-1:1, i, end:-1:1), [1 2 4 3]), 'valid');
         end
     end
+	% Save all useful info in a directory named by date/time
+	info = clock;
+        direc = sprintf('TEMP3_%d', filterInfo.data_set);
+        if exist(direc) ~= 7
+           mkdir(direc);
+        end
+	mat_name = sprintf('%s/%d-%d-%d@%d:%d', direc, info(1), info(2), info(3), info(4), info(5)) ;
+	valAP = mean(ap_cur);
+	save(mat_name, 'weights', 'valAP');
+
     
+	    
     
     
 end

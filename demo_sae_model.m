@@ -67,9 +67,9 @@ size(train_data_x)
 
 
 train_x_roll_subset = reshape(train_data_x(:,:,1:subset_size), size(train_data_x, 1) * ...
-    size(square_train_data_x, 2), subset_size);
+    size(train_data_x, 2), subset_size);
 
-reduction_factor = 4/5;
+reduction_factor = 3/5;
 reduction = size(train_data_x, 1) - size(train_data_x, 1)*reduction_factor;
 saeInfo = struct;
 saeInfo.inputSize = size(train_x_roll_subset, 1);
