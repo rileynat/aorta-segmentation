@@ -14,7 +14,7 @@ end
 train_data_x = [];
 train_data_y = [];
 
-data_set = 4;
+data_set = 15;
 
 for i=data_set
     filename = sprintf('normalized_data/train/%02d.mat', i);

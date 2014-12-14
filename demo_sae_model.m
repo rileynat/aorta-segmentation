@@ -78,8 +78,13 @@ saeInfo.sparsity = .1;
 saeInfo.lambda = 3e-3;
 saeInfo.beta = 3;
 
-input_features = RunSparseAE(train_x_roll_subset, saeInfo);
-save('input_features');
+[input_features, weights] = RunSparseAE(train_x_roll_subset, saeInfo);
+if exist('sae_results') ~= 7
+    mkdir('sae_results');
+end
+info = clock;
+direc = sprintf('sae_results/%g-%g-%g-%g:%g', info(1), info(2), info(3), info(4), info(5));
+save(direc, 'input_features', 'weights');
 
 
 % Reshape Features

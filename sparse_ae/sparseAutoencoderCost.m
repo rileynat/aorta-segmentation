@@ -54,7 +54,11 @@ h = sigmoid(z3); % a3
 c_init = sum(sum((h - data).^2)) / (2 * m);
 reg = (sum(sum(W1.^2)) + sum(sum(W2.^2)));
 rho_hat = sum(a2, 2) / m;
+rho_hat = rho_hat - 1e-14;
 rho = sparsityParam;
+assert(min(rho_hat.^2) ~= 0);
+assert(min((1-rho_hat).^2) ~= 0);
+
 sparse_left = rho .* log(rho ./ rho_hat);
 sparse_right = (1 - rho) .* log((1 - rho) ./ (1 - rho_hat));
 sparse_pen = sum(sparse_left + sparse_right);
