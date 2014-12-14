@@ -38,7 +38,7 @@ csize = [];
 
 addpath('/mnt/neocortex3/scratch/xcyan/aorta_seg/');
 
-RL = load('VLCrulers.mat');
+%RL = load('VLCrulers.mat');
 mkdir(ORISRC);
 mkdir(NORMSRC);
 
