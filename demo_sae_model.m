@@ -67,9 +67,9 @@ size(train_data_x)
 
 
 train_x_roll_subset = reshape(train_data_x(:,:,1:subset_size), size(train_data_x, 1) * ...
-    size(square_train_data_x, 2), subset_size);
+    size(train_data_x, 2), subset_size);
 
-reduction_factor = 4/5;
+reduction_factor = 3/5;
 reduction = size(train_data_x, 1) - size(train_data_x, 1)*reduction_factor;
 saeInfo = struct;
 saeInfo.inputSize = size(train_x_roll_subset, 1);
@@ -78,8 +78,13 @@ saeInfo.sparsity = .1;
 saeInfo.lambda = 3e-3;
 saeInfo.beta = 3;
 
-input_features = RunSparseAE(train_x_roll_subset, saeInfo);
-save('input_features');
+[input_features, weights] = RunSparseAE(train_x_roll_subset, saeInfo);
+if exist('sae_results') ~= 7
+    mkdir('sae_results');
+end
+info = clock;
+direc = sprintf('sae_results/%g-%g-%g-%g:%g', info(1), info(2), info(3), info(4), info(5));
+save(direc, 'input_features', 'weights');
 
 
 % Reshape Features

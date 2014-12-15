@@ -36,7 +36,9 @@ NORMSRC = ['normalized_data/' modename];
 rsize = [];
 csize = [];
 
-RL = load('VLCrulers.mat');
+addpath('/mnt/neocortex3/scratch/xcyan/aorta_seg/');
+
+%RL = load('VLCrulers.mat');
 mkdir(ORISRC);
 mkdir(NORMSRC);
 

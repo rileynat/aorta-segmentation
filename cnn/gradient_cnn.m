@@ -5,7 +5,7 @@ function [ cost, grad ] = gradient_cnn ( theta, train_data, train_labels, filter
     weights = unroll_params(theta, filterInfo, size(train_data,1), size(train_data,2));
 
     m = size(train_data, 3);
-    
+    %fflush(stdout);
     %forward prop
     hiddenLayer1Raw = convFirstLayer(train_data, weights.inToHidFilters, weights.inToHidBias, filterInfo.filterSize1, filterInfo.numFilters1);
     hiddenLayer1 = sigmoid(hiddenLayer1Raw);
@@ -13,6 +13,17 @@ function [ cost, grad ] = gradient_cnn ( theta, train_data, train_labels, filter
     hiddenLayer2 = sigmoid(hiddenLayer2Raw);
     outputLayerRaw = convFinalLayer(hiddenLayer2, weights.hidToOutFilters, weights.hidToOutBias, filterInfo.filterSize3, filterInfo.numFilters3);
     outputLayer = sigmoid(outputLayerRaw);
+
+    ap_cur = zeros(size(train_data, 3), 1);
+    % Display current AP
+    for i = 1:size(train_data, 3)
+       yhat = outputLayer(:,:,i);
+       yc = train_labels(:,:,i);
+       [~, ~, ap] = compute_ap(yhat(:), yc(:));
+       ap_cur(i) =  ap;
+    end
+
+    disp(sprintf('AP: %g', mean(ap_cur)));
     
     cost = cost_cnn(outputLayer, train_labels) ./ m;
     
@@ -61,11 +72,23 @@ function [ cost, grad ] = gradient_cnn ( theta, train_data, train_labels, filter
         
         deltaSum = sum(sum(sum(deltaHid1,1), 2), 4);
         grad.inToHidBias = deltaSum(:);
+
         for i = 1:filterInfo.numFilters1
             grad.inToHidFilters(:,:,i) = convn(train_data, permute(deltaHid1(end:-1:1, end:-1:1, i, end:-1:1), [1 2 4 3]), 'valid');
         end
     end
+	% Save all useful info in a directory named by date/time
+	info = clock;
+        direc = sprintf('TEMP3_%d', filterInfo.data_set);
+        if exist(direc) ~= 7
+           mkdir(direc);
+        end
+	mat_name = sprintf('%s/%d-%d-%d@%d:%d', direc, info(1), info(2), info(3), info(4), info(5)) ;
+	valAP = mean(ap_cur);
+	save(mat_name, 'weights', 'valAP');
+
     
+	    
     
     
 end
