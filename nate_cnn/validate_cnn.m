@@ -1,9 +1,11 @@
 function [ accuracy ] = validate_cnn( val_data, val_labels, weights, filterInfo )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
-    [~, theta] = roll_params(0, weights);
-    [accuracy, ~] = gradient_cnn(theta, val_data, val_labels, filterInfo, 0);
+    yhat = forwardFeed_cnn(val_data, val_labels, weights, filterInfo);
+    pred = yhat <= 0.5;
     
+    for i = 1:size(val_data,3)
+        
 
 end
 

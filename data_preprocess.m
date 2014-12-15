@@ -36,6 +36,7 @@ NORMSRC = ['normalized_data/' modename];
 rsize = [];
 csize = [];
 
+addpath('../aorta_seg/data');
 RL = load('VLCrulers.mat');
 mkdir(ORISRC);
 mkdir(NORMSRC);
