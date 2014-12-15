@@ -1,4 +1,4 @@
-
+function [] = demo_nate_model(weights)
 close all;
 clc;
 startup;
@@ -48,7 +48,7 @@ end
 filterInfo = struct;
 filterInfo.numFilters1 = 30;
 filterInfo.filterSize1 = 5;
-filterInfo.numFilters2 = 20;
+filterInfo.numFilters2 = 30;
 filterInfo.filterSize2 = 16;
 filterInfo.numFilters3 = filterInfo.numFilters2;
 filterInfo.filterSize3 = filterInfo.filterSize1 + filterInfo.filterSize2 - 1;
@@ -60,10 +60,12 @@ test_data_x = fit_HUscale(test_data_x);
 
 addpath('nate_cnn/');
 
-[weights] = train_cnn(train_data_x(:,:,:), train_data_y(:,:,:), filterInfo); 
-save('nate_cnn/weights.mat', 'weights');
+if ~exist('weights', 'var')
+    [weights] = train_cnn(train_data_x(:,:,:), train_data_y(:,:,:), filterInfo); 
+   
 
-save(strcat('nate_cnn/weights/weights_', date, '.mat'), 'weights');
+    save(strcat('nate_cnn/weights/weights_', date, '.mat'), 'weights');
+end
 
 [validAcc] = validate_cnn(val_data_x(:,:,:), val_data_y(:,:,:), weights, filterInfo);
 
