@@ -1,4 +1,4 @@
-function [] = demo_nate_model(weights)
+function [] = demo_nate_model(weights, data_set)
 
 close all;
 clc;
@@ -14,7 +14,9 @@ end
 train_data_x = [];
 train_data_y = [];
 
-data_set = 4;
+if ~exist('data_set', 'var')
+    data_set = 4;
+end
 
 for i=data_set
     filename = sprintf('normalized_data/train/%02d.mat', i);
@@ -52,7 +54,7 @@ end
 filterInfo = struct;
 filterInfo.numFilters1 = 30;
 filterInfo.filterSize1 = 5;
-filterInfo.numFilters2 = 30;
+filterInfo.numFilters2 = 10;
 filterInfo.filterSize2 = 16;
 filterInfo.numFilters3 = filterInfo.numFilters2;
 filterInfo.filterSize3 = filterInfo.filterSize1 + filterInfo.filterSize2 - 1;
@@ -71,10 +73,18 @@ end
 
 [testAP, testAcc, test_pred] = test_cnn(test_data_x(:,:,:), test_data_y(:,:,:), weights, filterInfo);
 
+flag_save = 0;
+if flag_save
+    direc = sprintf('%g-test-pred', data_set);
+    save(direc, 'test_pred');
+end
+
+
 fprintf('AP: val = %g (std %g), test = %g (std %g))\n', ...
         mean(valAP), std(valAP), mean(testAP), std(testAP));
 fprintf('ACC: val = %g (std %g), test = %g (std %g))\n', ...
         mean(valAcc), std(valAcc), mean(testAcc), std(testAcc));
+    
   
 % Save all useful info in a directory named by date/time
 info = clock;
