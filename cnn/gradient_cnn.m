@@ -5,7 +5,7 @@ function [ cost, grad ] = gradient_cnn ( theta, train_data, train_labels, filter
     weights = unroll_params(theta, filterInfo, size(train_data,1), size(train_data,2));
 
     m = size(train_data, 3);
-    
+    %fflush(stdout);
     %forward prop
     hiddenLayer1Raw = convFirstLayer(train_data, weights.inToHidFilters, weights.inToHidBias, filterInfo.filterSize1, filterInfo.numFilters1);
     hiddenLayer1 = sigmoid(hiddenLayer1Raw);
@@ -61,6 +61,7 @@ function [ cost, grad ] = gradient_cnn ( theta, train_data, train_labels, filter
         
         deltaSum = sum(sum(sum(deltaHid1,1), 2), 4);
         grad.inToHidBias = deltaSum(:);
+
         for i = 1:filterInfo.numFilters1
             grad.inToHidFilters(:,:,i) = convn(train_data, permute(deltaHid1(end:-1:1, end:-1:1, i, end:-1:1), [1 2 4 3]), 'valid');
         end

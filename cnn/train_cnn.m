@@ -3,6 +3,7 @@ function [ weights ] = train_cnn(train_data, train_labels, filterInfo )
 %parameters for training
 %   TODO when finished
     rng(1);
+
     weights = struct;
     weights.inToHidFilters = 0.01 .* randn(filterInfo.filterSize1, filterInfo.filterSize1, filterInfo.numFilters1);
     weights.inToHidBias = zeros(filterInfo.numFilters1, 1);
@@ -20,6 +21,7 @@ function [ weights ] = train_cnn(train_data, train_labels, filterInfo )
     % lbfgs
     options.method = 'lbfgs';
     options.maxiter = numIterations;
+    options.useMex = 0;
     
     [optTheta, ~] = minFunc(@(p) run_gradient_then_roll(p, train_data, train_labels, filterInfo), theta, options);
     weights = unroll_params(optTheta, filterInfo, size(train_data,1), size(train_data,2));
